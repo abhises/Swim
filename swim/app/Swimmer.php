@@ -2,12 +2,26 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Competition;
 use App\Group;
+use Illuminate\Database\Eloquent\Model;
+
 class Swimmer extends Model
 {
-    public function group()
+    //Protected 
+
+    public function groups()
     {
-    	return $this->belongsTo('App\Group');
+    	return $this->belongsToMany('App\Group','group_swimmer','swimmer_id','group_id');
     }
+
+    public function competitions()
+    {
+    	return $this->belongsToMany('App\Competition','competition_swimmer','swimmer_id','competition_id');
+    }
+
+    // public function times()
+    // {
+    // 	return $this->belongsTo('App\Target_time');
+    // }
 }

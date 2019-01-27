@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Swimming_pool;
+use App\Http\Resources\SwimmingpoolResource;
+use App\Swimmingpool;
 use Illuminate\Http\Request;
 
-class SwimmingPoolController extends Controller
+class SwimmingpoolController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class SwimmingPoolController extends Controller
      */
     public function index()
     {
-        //
+        $swimmingpool=Swimmingpool::all();
+        return SwimmingpoolResource::collection($swimmingpool);
     }
 
     /**
@@ -35,27 +37,35 @@ class SwimmingPoolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+       $swimmingpool=Swimmingpool::create([
+        'name'=>$request->name,
+        'location'=>$request->location,
+        'length'=>$request->length,
+        'type'=>$request->type
+       ]);
+
+        return new SwimmingpoolResource($swimmingpool);
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Swimming_pool  $swimming_pool
+     * @param  \App\Swimmingpool  $swimmingpool
      * @return \Illuminate\Http\Response
      */
-    public function show(Swimming_pool $swimming_pool)
+    public function show(Swimmingpool $swimmingpool)
     {
-        //
+        return new SwimmingpoolResource($swimmingpool);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Swimming_pool  $swimming_pool
+     * @param  \App\Swimmingpool  $swimmingpool
      * @return \Illuminate\Http\Response
      */
-    public function edit(Swimming_pool $swimming_pool)
+    public function edit(Swimmingpool $swimmingpool)
     {
         //
     }
@@ -64,22 +74,24 @@ class SwimmingPoolController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Swimming_pool  $swimming_pool
+     * @param  \App\Swimmingpool  $swimmingpool
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Swimming_pool $swimming_pool)
+    public function update(Request $request, Swimmingpool $swimmingpool)
     {
-        //
+         $swimmingpool->update($request->only(['name', 'location','length','type']));
+        return new SwimmingpoolResource($swimmingpool);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Swimming_pool  $swimming_pool
+     * @param  \App\Swimmingpool  $swimmingpool
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Swimming_pool $swimming_pool)
+    public function destroy(Swimmingpool $swimmingpool)
     {
-        //
+         $swimmingpool->delete();
+        return response()->json(null,200);
     }
 }

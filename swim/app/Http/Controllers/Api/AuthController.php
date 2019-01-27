@@ -12,8 +12,8 @@ class AuthController extends Controller
     public function register(Request $request)
     {
     	$validator=Validator::make($request->all(),[
-    		'name'=>'required',
-    		'email'=>'required',
+    		'name'=>'required|max:200|min:4',
+    		'email'=>'required|email',
     		'password'=>'required'
     	]);
     	if($validator->fails()){
@@ -54,4 +54,15 @@ class AuthController extends Controller
     			return response()->json(['error'=>'unauthorised'],401);
     		}
 }
+      public function logout(Request $request)
+      {
+         $user = Auth::guard('api')->user();
+
+            if ($user) {
+             $user->api_token = null;
+             $user->save();
+            }
+
+            return response()->json(['data' => 'User logged out.'], 200);
+      }
 }

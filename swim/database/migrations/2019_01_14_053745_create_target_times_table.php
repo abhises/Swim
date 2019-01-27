@@ -15,6 +15,8 @@ class CreateTargetTimesTable extends Migration
     {
         Schema::create('target_times', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('swimmer_id');
+            $table->float('time');
             $table->timestamps();
         });
     }

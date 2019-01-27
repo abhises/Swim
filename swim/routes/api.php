@@ -19,11 +19,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login','Api\AuthController@login');
 Route::post('register','Api\AuthController@register');
+Route::post('logout','Api\AuthController@logout');
 Route::group(['middleware'=>'auth:api'],function(){
 	
-Route::Resource('/swimmer','SwimmerController');
-	Route::Resource('/group','GroupController');
+	Route::apiResource('/swimmer','SwimmerController');
+	Route::apiResource('/group','GroupController');
+	Route::apiResource('/swimmingpool','SwimmingpoolController');
+
+	
+ 
 });
+
 
 
 

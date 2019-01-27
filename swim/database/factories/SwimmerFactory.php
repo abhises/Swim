@@ -1,16 +1,17 @@
 <?php
 
+//use App\Group;
+use App\Target_time;
 use Faker\Generator as Faker;
-use App\Group;
 
 
 $factory->define(App\Swimmer::class, function (Faker $faker) {
     return [
-    	'group_id'=>function(){
-    		return Group::all()->random();
-    	},
+    	// 'target_time_id'=>function(){
+    	// 	return Target_time::all()->random();
+    	// },
     	'firstname'=>$faker->firstNameMale,
-		'Middlename'=>$faker->lastName,
+		'middlename'=>$faker->lastName,
     	'lastname'=>$faker->lastName ,
     	'nickname'=>$faker->name,
     	'uniquename'=>$faker->title,

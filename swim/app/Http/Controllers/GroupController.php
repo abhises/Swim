@@ -16,7 +16,7 @@ class GroupController extends Controller
     public function index()
     {
         $group=Group::all();
-        return $group;
+        return GroupResource::collection($group);
     }
 
     /**

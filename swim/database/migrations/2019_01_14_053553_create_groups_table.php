@@ -15,11 +15,13 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
            $table->increments('id');
+           $table->integer('user_id');
+
             $table->string('name');
-            $table->string('coach_name');
-            $table->string('photo')->nullable();
-            $table->integer('phone_no');
-            $table->string('email');
+            //$table->string('coach_name');
+           // $table->string('photo')->nullable();
+           // $table->integer('phone_no');
+           // $table->string('email');
             $table->timestamps();
         });
     }

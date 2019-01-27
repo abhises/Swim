@@ -17,7 +17,7 @@ class SwimmerController extends Controller
     public function index()
     {
        $swimmers= Swimmer::all();
-       return $swimmers;
+       return SwimmerResource::collection($swimmers);
         
 
     }

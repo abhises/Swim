@@ -14,13 +14,13 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $role=Role::create([
-        	'name'=>'SuperAdmin',
+        	'name'=>'admin',
         	'description'=>'This is SuperAdmin Table'
 
         ]);
 
         $role=Role::create([
-        	'name'=>'Admin',
+        	'name'=>'user',
         	'description'=>'This is admin table'
         ]);
 

@@ -20,6 +20,7 @@ class CreateSwimmingpoolsTable extends Migration
             $table->string('length');
             $table->string('type');
             $table->timestamps();
+             $table->softDeletes();
         });
     }
 

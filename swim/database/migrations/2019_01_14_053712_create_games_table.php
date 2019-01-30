@@ -20,6 +20,7 @@ class CreateGamesTable extends Migration
             $table->integer('start_date');
             $table->integer('end_date');
             $table->timestamps();
+             $table->softDeletes();
         });
     }
 

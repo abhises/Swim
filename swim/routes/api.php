@@ -17,17 +17,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login','Api\AuthController@login');
-Route::post('register','Api\AuthController@register');
-Route::post('logout','Api\AuthController@logout');
-Route::group(['middleware'=>'auth:api'],function(){
-	
-	Route::apiResource('/swimmer','SwimmerController');
-	Route::apiResource('/group','GroupController');
-	Route::apiResource('/swimmingpool','SwimmingpoolController');
-
-	
+    Route::post('login','Api\AuthController@login');
  
+ //Route for authenticated user
+    Route::group(['middleware'=>'auth:api'],function(){
+		   Route::apiResource('/game','GameController');
+		    Route::apiResource('/competition','CompetitionController');
+	       Route::apiResource('/swimmer','SwimmerController');
+	       Route::apiResource('/group','GroupController');
+	       Route::apiResource('/swimmingpool','SwimmingpoolController');
+	       Route::post('/logout','Api\AuthController@logout');
+    //Route for superadmin
+	   Route::group(['middleware'=>'admin'],function(){
+           Route::post('/register','Api\AuthController@register');
+           Route::apiResource('/useredit','Api\EditUserController');
+
+});
 });
 
 

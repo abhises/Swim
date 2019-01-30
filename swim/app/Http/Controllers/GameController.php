@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\Http\Resources\GameResource;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -14,7 +15,8 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+       $game=Game::all();
+       return GameResource::collection($game);
     }
 
     /**
@@ -24,7 +26,7 @@ class GameController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +37,15 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required'
+        ]);
+        $game=Game::create([
+            'name'=>$request->name,
+            'start_date'=>$request->start_date,
+            'end_date'=>$request->end_date
+        ]);
+        return new GameResource($game);
     }
 
     /**
@@ -46,7 +56,7 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        //
+        return new GameResource($game);
     }
 
     /**
@@ -57,7 +67,7 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        //
+        
     }
 
     /**
@@ -69,7 +79,8 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
-        //
+        $game->update($request->only(['name','start_date','end_date']));
+        return new GameResource($game);
     }
 
     /**
@@ -80,6 +91,7 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        //
+        $game->delete();
+        return response()->json(null,200);
     }
 }

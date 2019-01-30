@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\TargettimeResource;
-use App\Target_time;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\User;
 use Illuminate\Http\Request;
 
-class TargetTimeController extends Controller
+class EditUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class TargetTimeController extends Controller
      */
     public function index()
     {
-        $target_time=Target_time::all();
-        return TargettimeResource::collection($target_time);
+        $user=User::all();
+        return UserResource::collection($user);
     }
 
     /**
@@ -37,32 +38,29 @@ class TargetTimeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'time'=>'required'
-        ]);
-        $target_time=Target_time::create([
-            'time'=>$request->time
-        ]);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Target_time  $target_time
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Target_time $target_time)
+    public function show($id)
     {
-        return new TargettimeResource($target_time);
+        return new UserResource(User::find($id));
+       // return new UserResource($id);
+        //return response()->json(['abhises'=>'abhises']);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Target_time  $target_time
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Target_time $target_time)
+    public function edit($id)
     {
         //
     }
@@ -71,27 +69,24 @@ class TargetTimeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Target_time  $target_time
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Target_time $target_time)
+    public function update(Request $request, $id)
     {
-        $target_time->update($request->only(['time']));
-        return new TargettimeResource($target_time);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Target_time  $target_time
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Target_time $target_time)
+    public function destroy($id)
     {
-        if ($target_time ==null) {
-            return response()->json('message'=>'no data');
-        }
-        $target_time->delete();
+        $user=User::find($id);
+        $user->delete();
         return response()->json(null,200);
     }
 }

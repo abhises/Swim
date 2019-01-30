@@ -35,6 +35,7 @@ class CreateCompetitionsTable extends Migration
             $table->integer('IndMedley_200');
             $table->integer('IndMedley_400');
             $table->timestamps();
+             $table->softDeletes();
         });
     }
 

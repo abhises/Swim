@@ -18,6 +18,7 @@ class CreateTargetTimesTable extends Migration
             $table->integer('swimmer_id');
             $table->float('time');
             $table->timestamps();
+             $table->softDeletes();
         });
     }
 

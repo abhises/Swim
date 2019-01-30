@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use  HasApiTokens, Notifiable;
-     use SoftDeletes;
+    use SoftDeletes;
 
 
     protected $dates = ['deleted_at'];
@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','photo'
     ];
 
     /**

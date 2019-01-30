@@ -23,6 +23,7 @@ class CreateGroupsTable extends Migration
            // $table->integer('phone_no');
            // $table->string('email');
             $table->timestamps();
+             $table->softDeletes();
         });
     }
 

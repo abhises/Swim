@@ -20,6 +20,7 @@ class CreateGroupSwimmerTable extends Migration
               $table->integer('swimmer_id')->unsigned();
             $table->foreign('swimmer_id')->references('id')->on('swimmers')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
+             $table->softDeletes();
         });
     }
 

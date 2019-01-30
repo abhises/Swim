@@ -37,7 +37,15 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'user_id'=>'required'
+        ]);
+        $group=Group::create([
+            'name'=>$request->name,
+            'user_id'=>$request->user_id
+        ]);
+        return new GroupResource($group);
     }
 
     /**
@@ -73,7 +81,8 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        //
+        $group->update($request->only(['name','user_id']));
+        return new GroupResource($group);
     }
 
     /**
@@ -84,6 +93,11 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        //
+        if ($group== null) {
+            return response()->json(['message'=>'no data']);
+            
+        }
+        $group->delete();
+        return response()->json(null,200);
     }
 }

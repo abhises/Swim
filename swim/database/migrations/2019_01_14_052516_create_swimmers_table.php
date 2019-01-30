@@ -24,7 +24,7 @@ class CreateSwimmersTable extends Migration
              $table->integer('dob');
              $table->string('gender');
              $table->string('city_of_birth');
-             $table->string('School')->nullable();
+             $table->string('school')->nullable();
              $table->integer('date_of_joined')->nullable();
              $table->string('photo')->nullable();
              $table->string('country')->nullable();
@@ -41,6 +41,7 @@ class CreateSwimmersTable extends Migration
              $table->string('stroke')->nullable();
              $table->string('main')->nullable();
              $table->timestamps();
+              $table->softDeletes();
         });
     }
 

@@ -21,7 +21,7 @@ class AuthController extends Controller
     		'name'=>'required|max:200|min:4',
     		'email'=>'required|email',
     		'password'=>'required',
-            'photo'=>'image|max:4999'
+            'photo'=>'required|image|max:4999'
     	]);
     	if($validator->fails()){
     		return response()->json(['error'=>$validator->errors()],401);

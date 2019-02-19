@@ -108,7 +108,7 @@ class CompetitionController extends Controller
     public function destroy(Competition $competition)
     {
         if ($competition==null) {
-            return response()->json(['message'=>'no data'])''
+            return response()->json(['message'=>'no data']);
         }
         $competition->delete($competition);
         return response()->json(null,200);
